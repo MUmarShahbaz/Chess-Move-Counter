@@ -1,0 +1,48 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Collector",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/Collector.py",
+      "console": "integratedTerminal",
+      "env": {
+        "PLAYER": "Your_Username",
+        "NUMBER_TO_REVIEW": "-1"
+      }
+    },
+    {
+      "name": "Run Analyzer",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/Analyzer.py",
+      "console": "integratedTerminal",
+      "env": {
+        "PLAYER": "Your_Username",
+        "BOT_USER": "bot_account_username",
+        "BOT_PASS": "bot_account_password"
+      }
+    },
+    {
+      "name": "Generate Summary",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/Summary.py",
+      "console": "integratedTerminal",
+    },
+    {
+      "name": "Run All",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/Run-All.py",
+      "console": "integratedTerminal",
+      "env": {
+        "PLAYER": "Your_Username",
+        "NUMBER_TO_REVIEW": "10",
+        "BOT_USER": "bot_account_username",
+        "BOT_PASS": "bot_account_password"
+      }
+    }
+  ]
+}

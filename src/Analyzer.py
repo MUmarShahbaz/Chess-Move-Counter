@@ -12,7 +12,7 @@ PASSWORD = os.getenv("BOT_PASS")
 
 # Get URLS
 urls = []
-with open("games.txt", "r", encoding="utf8") as f:
+with open("dump/games.txt", "r", encoding="utf8") as f:
     line = f.readline().strip()
     while line != "":
         urls.append(line)
@@ -126,5 +126,6 @@ moveCounts = {
     "blunder" : blunder,
 }
 
-with open("moves.json", "w") as f:
+os.makedirs(os.path.dirname("dump/moves.json"), exist_ok=True)
+with open("dump/moves.json", "w") as f:
     json.dump(moveCounts, f, indent=4)

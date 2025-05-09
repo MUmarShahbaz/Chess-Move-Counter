@@ -53,6 +53,7 @@ for archive in ARCHIVES:
 
 print(f"Successfully Collected { len(final_urls) }")
 
-with open("games.txt", "w", encoding="utf-8") as f:
+os.makedirs(os.path.dirname("dump/games.txt"), exist_ok=True)
+with open("dump/games.txt", "w", encoding="utf-8") as f:
         for url in final_urls:
             f.write(url + "\n")

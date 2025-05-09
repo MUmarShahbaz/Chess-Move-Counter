@@ -1,9 +1,6 @@
-import os
 import json
 
-SUMMARY = os.getenv('GITHUB_STEP_SUMMARY')
-
-with open('moves.json', 'r') as file:
+with open('dump/moves.json', 'r') as file:
     MOVES = json.load(file)
 
 def HTML_PAGE(moves):
@@ -347,14 +344,5 @@ def HTML_PAGE(moves):
 </html>
 """
 
-
-with open(SUMMARY, 'w') as summary:
-    summary.write("# MOVE COUNTS\n\n")
-    summary.write("**NOTE: HTML VERSION IN WORKFLOW ARTIFACT**\n\n")
-    summary.write("|MOVE|COUNT|\n")
-    summary.write("|:-|:-:|\n")
-    for move, count in MOVES.items():
-        summary.write(f"|{move}|{count}|\n")
-
-with open("Moves.html", 'w') as html:
+with open("Results.html", 'w') as html:
     html.write(HTML_PAGE(MOVES))
