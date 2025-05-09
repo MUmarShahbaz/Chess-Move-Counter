@@ -7,10 +7,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/src/Collector.py",
       "console": "integratedTerminal",
-      "env": {
-        "PLAYER": "Your_Username",
-        "NUMBER_TO_REVIEW": "-1"
-      }
+      "envFile": "${workspaceFolder}/.env"
     },
     {
       "name": "Run Analyzer",
@@ -18,11 +15,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/src/Analyzer.py",
       "console": "integratedTerminal",
-      "env": {
-        "PLAYER": "Your_Username",
-        "BOT_USER": "bot_account_username",
-        "BOT_PASS": "bot_account_password"
-      }
+      "envFile": "${workspaceFolder}/.env"
     },
     {
       "name": "Generate Summary",
@@ -37,12 +30,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/Run-All.py",
       "console": "integratedTerminal",
-      "env": {
-        "PLAYER": "Your_Username",
-        "NUMBER_TO_REVIEW": "10",
-        "BOT_USER": "bot_account_username",
-        "BOT_PASS": "bot_account_password"
-      }
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }
