@@ -20,34 +20,21 @@ Before you get started, make sure you have:
 - 🧩 [Python Extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
 
 ## 🔧 Dependencies
-- 📦 Python packages:
-  - `requests`
-  - `playwright` with `chromium`
-
-To install dependencies:
-```bash  
-pip install requests playwright  
-playwright install chromium  
-```
+All dependencies are automatically installed by running `Install-Dependencies.py`
 
 ## 🚀 Setup Instructions
 
 1. Download the repository to your local machine.
-2. In VS Code, create a `.env` file in the root directory
-3. Add the following to the `.env`:
-   ```env
-   PLAYER=Your_Username
-   NUMBER_TO_REVIEW=10
-   BOT_USER=Bot_Username
-   BOT_PASS=Bot_Password
-   ```
-   - `PLAYER` : The chess.com username to analyze
-   - `NUMBER_TO_REVIEW` : Integer for how many of the latest games to analyze (Use `-1` analyze all)
-   - `BOT_USER` & `BOT_PASS` : username and password of a bot account that will be used to scrape through your games. (You can use your own account instead of making a bot)
-4. Open the VS Code debugger and run the `Run All` configuration.
-5. The program will analyze your games and automatically open the results in your default browser when it's done! 🖥️🎉
+2. Run the `Run-All.py` script
+3. If not already present, a window will appear and ask you to fill some variables for the `.env` file
+   - Variables:
+     - **Player** : The chess.com username to analyze
+     - **Games to Review** : Integer for how many of the latest games to analyze (Use `-1` analyze all)
+     - **Bot username** & **Bot password** : Username and password of a bot account that will be used to scrape through your games. (Any account that uses chess.com's own login page, even yours)
+   - **NOTE:** It will only generate the `.env` once. To redo, it you can manually edit or delete it (You will be asked to fill the variables again) 
+4. The program will analyze your games and automatically open the results in your default browser when it's done! 🖥️🎉
 
-**NOTE: WHILST THE PROGRAM IS RUNNING, IT WILL OPEN A BROWSER AND OPEN THE GAMES SEQUENTIALLY. THIS IS ESSENTIAL, DO NOT INTERUPT IT!!**
+**NOTE:** Whilst the program is running, it will open a browser and open the games sequentially. This is essential, **DO NOT INTERRUPT IT!!**
 
 ## Why not create a workflow?
 A GitHub Runner has only 2 cores meaning that results using a GitHub workflow will be much less accurate then running it locally on one's own computer.
