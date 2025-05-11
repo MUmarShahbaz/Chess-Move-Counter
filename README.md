@@ -38,3 +38,49 @@ All dependencies are automatically installed by running `Install-Dependencies.py
 
 ## Why not create a workflow?
 A GitHub Runner has only 2 cores meaning that results using a GitHub workflow will be much less accurate then running it locally on one's own computer.
+
+## Flowchart
+
+```mermaid
+---
+config:
+  layout: dagre
+  theme: redux
+  look: classic
+---
+flowchart TD
+ subgraph E["Run Collector.py"]
+        F["Access Chess.com API to Find Latest Reviewed Games"]
+        G["Store N Game URLs in games.txt"]
+  end
+ subgraph H["Run Analyzer.py"]
+        I["Open Chrome and Login to Chess.com"]
+        J["Open a Game and Change Engine Settings"]
+        K["For Each URL in games.txt"]
+        L["Open URL and Wait for Game to Load"]
+        M["Determine Whether User is White or Black"]
+        N["Count Moves of Each Type"]
+        O["Store Sum for Each Type in moves.json"]
+  end
+ subgraph P["Run Summary.py"]
+        Q["Load moves.json"]
+        R["Generate HTML Page and Output It"]
+  end
+    A["Start"] --> B{"Is .env File Present?"}
+    B -- Yes --> C["Load ENV"]
+    B -- No --> D["Create Prompt and Generate ENV"]
+    D --> C
+    C --> E
+    E --> H
+    F --> G
+    H --> P
+    I --> J
+    J --> K
+    K --> L & O
+    L --> M
+    M --> N
+    N --> K
+    Q --> R
+    P --> S["Open Output"]
+    S --> T["End"]
+```
