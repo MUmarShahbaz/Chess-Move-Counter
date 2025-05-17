@@ -1,9 +1,10 @@
 import json
+import os
 
 with open('dump/moves.json', 'r') as file:
     MOVES = json.load(file)
 
-def HTML_PAGE(moves):
+def RESULTS(moves):
     return f"""
 <!DOCTYPE html>
 <html lang='en'>
@@ -62,13 +63,28 @@ def HTML_PAGE(moves):
         .move-count {{
             font-weight: bold;
         }}
+
+        a {{
+            color: rgb(0, 255, 98);
+            text-decoration: none;
+        }}
     </style>
 </head>
 
 <body>
     <div class='review-container'>
-        <div class='review-title'>Analyser Results</div>
+        <div class='review-title'>Analyzer Results</div>
 
+        <div class="move-row">
+            <div class="move-label">Result Date</div>
+            <div class="move-count">{ moves.get("time", "") }</div>
+        </div>
+        <div class="move-row">
+            <div class="move-label">Total games</div>
+            <div class="move-count">{ moves.get("games", 0) }</div>
+        </div>
+        <br>
+        <br>
         <div class='move-row'>
             <div class='move-label'>
                 <svg xmlns="http://www.w3.org/2000/svg" class="" width="24" height="24" viewBox="0 0 18 19">
@@ -338,11 +354,109 @@ def HTML_PAGE(moves):
             </div>
             <div class='move-count'>{moves.get("blunder", 0)}</div>
         </div>
+        <div class="move-row">
+            <div class="move-label"></div>
+            <div class="move-count"><a href="Brilliant.html">See Brilliant moves</a></div>
+        </div>
     </div>
 </body>
 
 </html>
 """
 
-with open("Results.html", 'w') as html:
-    html.write(HTML_PAGE(MOVES))
+def BRILLIANTS(moves):
+    urls = ""
+    for brilliant in moves.get("brilliant_urls", []):
+        urls += f"""
+        <div class="url-row">
+            <div class="url-label">
+                <a class="url-link" href="{brilliant[1]}" target="_blank">{brilliant[1]}</a>
+            </div>
+        </div>
+"""
+    
+    return f"""
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BRILLIANT!!!</title>
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }}
+
+        .url-container {{
+            max-width: 600px;
+            width: 100%;
+            background-color: #2c2c2c;
+            padding: 20px;
+            border-radius: 10px;
+        }}
+
+        .url-title {{
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+        }}
+
+        .url-row {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #444;
+        }}
+
+        .url-row:last-of-type {{
+            border-bottom: none;
+        }}
+
+        .url-label {{
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }}
+
+        .url-label svg {{
+            margin-right: 10px;
+        }}
+
+        .url-link {{
+            color: rgb(0, 255, 98);
+            text-decoration: none;
+            word-break: break-all;
+        }}
+
+        .url-link:hover {{
+            text-decoration: underline;
+        }}
+    </style>
+</head>
+
+<body>
+    <div class="url-container">
+        <div class="url-title">Brilliant moves</div>
+        { urls }
+    </div>
+</body>
+
+</html>
+"""
+
+os.makedirs(os.path.dirname("output/Results.html"), exist_ok=True)
+os.makedirs(os.path.dirname("output/Brilliant.html"), exist_ok=True)
+with open("output/Results.html", 'w') as html:
+    html.write(RESULTS(MOVES))
+
+with open("output/Brilliant.html", 'w') as brilliants:
+    brilliants.write(BRILLIANTS(MOVES))

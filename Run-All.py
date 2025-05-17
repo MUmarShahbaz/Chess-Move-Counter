@@ -52,5 +52,5 @@ subprocess.run(["python", "src/Collector.py"], env=env)
 subprocess.run(["python", "src/Analyzer.py"], env=env)
 subprocess.run(["python", "src/Summary.py"], env=env)
 
-html_file = os.path.abspath("Results.html")
+html_file = os.path.abspath("output/Results.html")
 webbrowser.open(f"file://{html_file}")
